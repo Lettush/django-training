@@ -1,6 +1,9 @@
 from django.views.generic import ListView
 from django.views.generic.detail import DetailView
+from django.views.generic.edit import CreateView
 from django.utils import timezone
+
+from .forms import PersonForm
 from .models import Person
 
 
@@ -18,6 +21,16 @@ class PersonListView(ListView):
 class PersonDetailView(DetailView):
     model = Person
     template_name = "myapp/person_detail.html"
+
+
+class PersonCreateView(CreateView):
+    model = Person
+    form_class = PersonForm
+    template_name = "myapp/person_create.html"
+    success_url = "/"
+    
+    # def get_success_url(self):
+    #     return reverse("person_list_view")
 
 
 """
