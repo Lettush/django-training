@@ -10,21 +10,34 @@
     </head>
     <body>
         <div class="user-details-container">
-            <h1>{{ object.first_name }} {{ object.last_name }}</h1>
-            <ul>
-                <li>{{ object.nickname }}</li>
-                <li>{{ object.gender }}</li>
-                <li>{{ object.address }}</li>
-                <li>{{ object.favorite_artist }}</li>
-                <li>{{ object.birthday }}</li>
-                <li>{{ object.zodiac_sign }}</li>
-                {% if object.profile_picture %}
-                    <li><img src="{{ object.profile_picture.url }}" width="300"/></li>
-                {% endif %}
-                <li>{{ object.mbti }}</li>
-                <li>{{ object.iq }}</li>
-                <li>{{ object.blood_type }}</li>
+            <a href="{% url 'person_list_view' %}"><button> Back To Home</button></a>
+            {% if object.profile_picture %}
+            <div class="user-avatar">
+                <img src="{{ object.profile_picture.url }}" />
+            </div>
+            {% endif %}
+            <h1 style="text-align: center">
+                {{ object.first_name }} {{ object.last_name }}
+            </h1>
+            <ul class="user-info">
+                <p>Nickname: {{ object.nickname }}</p>
+                <p>Gender: {{ object.gender }}</p>
+                <p>Address: {{ object.address }}</p>
+                <p>Favorite Artist: {{ object.favorite_artist }}</p>
+                <p>Birthday: {{ object.birthday }}</p>
+                <p>Zodiac Sign: {{ object.get_zodiac_sign_display }}</p>
+                <p>MBTI: {{ object.mbti }}</p>
+                <p>IQ: {{ object.iq }}</p>
+                <p>Blood Type: {{ object.blood_type }}</p>
             </ul>
+            <div>
+                <a href="{% url 'person_update_view' pk=object.id %}"
+                    ><button>Update</button></a
+                >
+                <a href="{% url 'person_delete_view' pk=object.id %}"
+                    ><button>Delete</button></a
+                >
+            </div>
         </div>
     </body>
 </html>

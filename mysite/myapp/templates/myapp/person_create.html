@@ -1,19 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Person Create Form</title>
-    </head>
-    <body>
-        <form method="POST">
-            <!-- Security token -->
-            {% csrf_token %}
+{% extends 'myapp/base_form.html' %}
 
-            <!-- Using the formset -->
-            {{ form.as_p }}
+{% load crispy_forms_tags %}
 
-            <input type="submit" value="Submit" />
-        </form>
-    </body>
-</html>
+{% block title %} Create Person {% endblock %}
+
+{% block content %}
+  <form method="post">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <button type="submit" class="btn btn-success">Create</button>
+  </form>
+{% endblock %}
