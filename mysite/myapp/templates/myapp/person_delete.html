@@ -1,17 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Person Delete View</title>
-    </head>
-    <body>
-        <form method="post">
-            {% csrf_token %}
+{% extends 'myapp/base_form.html' %} 
+{% load crispy_forms_tags %} 
+{% block title %} Delete Person {% endblock %} 
+{% block content %}
+<form method="post">
+    {% csrf_token %}
 
-            <p>Are you sure you want to delete "{{ object }}"?</p>
+    <p>Are you sure you want to delete "{{ object }}"?</p>
 
-            <input type="submit" value="Confirm" />
-        </form>
-    </body>
-</html>
+    <button type="submit" class="btn btn-danger">Delete</button>
+    <a class="btn btn-light" href="{% url 'person_detail_view' pk=object.id %}">Back</a>
+    
+</form>
+{% endblock %}
